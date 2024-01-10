@@ -1,11 +1,11 @@
 import React from 'react'
 
-const InfoPage = () => {
+const TasksPage = () => {
   return (
     <h1 className='text-7xl'>
-      About Info Page
+      Tasks Page
     </h1>
   )
 }
 
-export default InfoPage
+export default TasksPage

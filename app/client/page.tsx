@@ -1,11 +1,11 @@
 import React from 'react'
 
-const InfoPage = () => {
+const ClientPage = () => {
   return (
     <h1 className='text-7xl'>
-      About Info Page
+      Client Page
     </h1>
   )
 }
 
-export default InfoPage
+export default ClientPage
