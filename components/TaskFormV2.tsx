@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { createTaskV2 } from "@/utils/actions";
+import { State, createTaskV2 } from "@/utils/actions";
 import { useFormStatus, useFormState } from "react-dom";
 
 const SubmitButton = () => {
@@ -16,10 +16,6 @@ const SubmitButton = () => {
       {pending ? "please wait" : "CREATE TASK"}
     </button>
   );
-};
-
-type State = {
-  message: string | null;
 };
 
 const initialState: State = {

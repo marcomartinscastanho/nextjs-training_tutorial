@@ -2,6 +2,7 @@
 import { revalidatePath } from "next/cache";
 import prisma from "./db";
 import { redirect } from "next/navigation";
+import { z } from "zod";
 
 export const getAllTasks = async () =>
   prisma.task.findMany({ orderBy: { createdAt: "desc" } });
@@ -14,21 +15,28 @@ export const createTask = async (formData: FormData) => {
   }
 };
 
-export const createTaskV2 = async (prevState: any, formData: FormData) => {
-  // delay for testing purposes
-  await new Promise((resolve) => setTimeout(resolve, 1000));
+export type State = {
+  message: string | null;
+};
 
+export const createTaskV2 = async (
+  prevState: State | undefined,
+  formData: FormData
+) => {
   const content = formData.get("content") as string;
-  if (content) {
-    return prisma.task
-      .create({ data: { content } })
-      .then(() => {
-        revalidatePath("/tasks");
-        return { message: "success !!!" };
-      })
-      .catch((error) => {
-        return { message: "error..." };
-      });
+  const Task = z.object({
+    content: z.string().min(5),
+  });
+  try {
+    Task.parse({ content });
+    return prisma.task.create({ data: { content } }).then(() => {
+      revalidatePath("/tasks");
+      return { message: "success !!!" };
+    });
+  } catch (error) {
+    console.log(error);
+
+    return { message: "error..." };
   }
 };
 
