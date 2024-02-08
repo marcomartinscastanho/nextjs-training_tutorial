@@ -2,7 +2,7 @@
 
 import React from "react";
 import { createTaskV2 } from "@/utils/actions";
-import { useFormStatus } from "react-dom";
+import { useFormStatus, useFormState } from "react-dom";
 
 const SubmitButton = () => {
   const { pending } = useFormStatus();
@@ -18,9 +18,20 @@ const SubmitButton = () => {
   );
 };
 
+type State = {
+  message: string | null;
+};
+
+const initialState: State = {
+  message: null,
+};
+
 const TaskFormV2 = () => {
+  const [state, formAction] = useFormState(createTaskV2, initialState);
+
   return (
-    <form action={createTaskV2}>
+    <form action={formAction}>
+      {state?.message ? <p className="mb-2">{state.message}</p> : null}
       <div className="join w-full">
         <input
           type="text"

@@ -14,14 +14,21 @@ export const createTask = async (formData: FormData) => {
   }
 };
 
-export const createTaskV2 = async (formData: FormData) => {
+export const createTaskV2 = async (prevState: any, formData: FormData) => {
   // delay for testing purposes
   await new Promise((resolve) => setTimeout(resolve, 1000));
 
   const content = formData.get("content") as string;
   if (content) {
-    await prisma.task.create({ data: { content } });
-    revalidatePath("/tasks");
+    return prisma.task
+      .create({ data: { content } })
+      .then(() => {
+        revalidatePath("/tasks");
+        return { message: "success !!!" };
+      })
+      .catch((error) => {
+        return { message: "error..." };
+      });
   }
 };
 
