@@ -34,7 +34,14 @@ const SingleDrinkPage: FC<Props> = async ({ params }) => {
         BACK TO DRINKS
       </Link>
       {/* <Image src={drinkImg} className="w-48 rounded-lg" alt="drink" /> */}
-      <Image src={imgSrc} width={300} height={300} className="w-48 rounded-lg shadow-lg mb-4" priority alt={title} />
+      <Image
+        src={imgSrc}
+        width={300}
+        height={300}
+        className="w-48 rounded-lg shadow-lg mb-4"
+        priority
+        alt={title}
+      />
       <h1 className="text-4xl mb-8">{title}</h1>
     </div>
   );
