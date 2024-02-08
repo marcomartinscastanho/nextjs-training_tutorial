@@ -1,11 +1,14 @@
-import React from 'react'
+import TaskForm from '@/components/TaskForm';
+import TaskList from '@/components/TaskList';
+import React from 'react';
 
 const TasksPage = () => {
   return (
-    <h1 className='text-7xl'>
-      Tasks Page
-    </h1>
-  )
-}
+    <div className="max-w-lg">
+      <TaskForm />
+      <TaskList />
+    </div>
+  );
+};
 
-export default TasksPage
+export default TasksPage;
