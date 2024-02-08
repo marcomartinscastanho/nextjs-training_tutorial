@@ -1,10 +1,6 @@
+import { Drink } from '@/types/drink';
 import Link from 'next/link';
 import React, { FC } from 'react';
-
-type Drink = {
-  idDrink: string;
-  strDrink: string;
-};
 
 interface Props {
   drinks: Drink[];
