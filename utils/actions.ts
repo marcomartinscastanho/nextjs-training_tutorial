@@ -56,13 +56,13 @@ export const editTask = async (formData: FormData) => {
   const content = formData.get("content") as string;
   const completed = formData.get("completed") as string;
 
-  await prisma.task
-    .update({
-      where: { id },
-      data: {
-        content,
-        completed: completed === "on",
-      },
-    })
-    .then(() => redirect("/tasks"));
+  await prisma.task.update({
+    where: { id },
+    data: {
+      content,
+      completed: completed === "on",
+    },
+  });
+  revalidatePath("/tasks");
+  redirect("/tasks");
 };

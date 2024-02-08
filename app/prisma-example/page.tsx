@@ -1,20 +1,21 @@
-import React from 'react';
-import prisma from '@/utils/db';
+import React from "react";
+import prisma from "@/utils/db";
 
 const prismaHandlers = async () => {
-  await prisma.task.create({
-    data: {
-      content: 'wake up',
-    },
-  });
+  console.log("prisma example");
 
   return await prisma.task.findMany({
-    orderBy: { createdAt: 'desc' },
+    orderBy: { createdAt: "desc" },
   });
 };
 
 const PrismaExamplePage = async () => {
   const tasks = await prismaHandlers();
+
+  if (tasks.length === 0) {
+    return <h2 className="mt-8 font-medium txt-lg">No tasks to show...</h2>;
+  }
+
   return (
     <div>
       <h1 className="text-7xl">Prisma Example Page</h1>
