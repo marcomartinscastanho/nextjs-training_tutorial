@@ -1,11 +1,11 @@
-import TaskForm from '@/components/TaskForm';
-import TaskList from '@/components/TaskList';
-import React from 'react';
+import TaskFormV2 from "@/components/TaskFormV2";
+import TaskList from "@/components/TaskList";
+import React from "react";
 
 const TasksPage = () => {
   return (
     <div className="max-w-lg">
-      <TaskForm />
+      <TaskFormV2 />
       <TaskList />
     </div>
   );
