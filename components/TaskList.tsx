@@ -1,10 +1,10 @@
-import React from 'react';
-import prisma from '@/utils/db';
-import Link from 'next/link';
-import DeleteForm from './DeleteForm';
+import React from "react";
+import Link from "next/link";
+import DeleteForm from "./DeleteForm";
+import { getAllTasks } from "@/utils/actions";
 
 const TaskList = async () => {
-  const tasks = await prisma.task.findMany({ orderBy: { createdAt: 'desc' } });
+  const tasks = await getAllTasks();
   if (tasks.length === 0) {
     return <h2 className="mt-8 font-medium txt-lg">No tasks to show...</h2>;
   }
@@ -16,7 +16,11 @@ const TaskList = async () => {
           key={task.id}
           className="flex justify-between items-center px-6 py-4 mb-4 border border-base-300 rounded-lg shadow-lg"
         >
-          <h2 className={`text-lg capitalize ${task.completed ? 'line-through' : 'null'}`}>
+          <h2
+            className={`text-lg capitalize ${
+              task.completed ? "line-through" : "null"
+            }`}
+          >
             {task.content}
           </h2>
           <div className="flex gap-6 items-center">
