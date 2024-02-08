@@ -17,10 +17,11 @@ const TaskPage: FC<Props> = async ({ params }) => {
 
   return (
     <>
-      <div className="mb-8" />
-      <Link href="/tasks" className="btn btn-accent">
-        BACK TO TASKS
-      </Link>
+      <div className="mb-8">
+        <Link href="/tasks" className="btn btn-accent">
+          BACK TO TASKS
+        </Link>
+      </div>
       <EditForm task={task} />
     </>
   );

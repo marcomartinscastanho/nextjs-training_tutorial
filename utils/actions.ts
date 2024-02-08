@@ -1,6 +1,7 @@
 "use server";
 import { revalidatePath } from "next/cache";
 import prisma from "./db";
+import { redirect } from "next/navigation";
 
 export const getAllTasks = async () =>
   prisma.task.findMany({ orderBy: { createdAt: "desc" } });
@@ -24,4 +25,18 @@ export const deleteTask = async (formData: FormData) => {
 export const getTask = async (id: string) =>
   prisma.task.findUnique({ where: { id } });
 
-export const editTask = async (formData: FormData) => {};
+export const editTask = async (formData: FormData) => {
+  const id = formData.get("id") as string;
+  const content = formData.get("content") as string;
+  const completed = formData.get("completed") as string;
+
+  await prisma.task
+    .update({
+      where: { id },
+      data: {
+        content,
+        completed: completed === "on",
+      },
+    })
+    .then(() => redirect("/tasks"));
+};
