@@ -31,12 +31,12 @@ export const createTaskV2 = async (
     Task.parse({ content });
     return prisma.task.create({ data: { content } }).then(() => {
       revalidatePath("/tasks");
-      return { message: "success !!!" };
+      return { message: "success" };
     });
   } catch (error) {
     console.log(error);
 
-    return { message: "error..." };
+    return { message: "error" };
   }
 };
 
